@@ -1,0 +1,28 @@
+Silp no 11
+2 Model the following Society relations between people working in “HCL”, as a graph model, and answer the queries using Cypher. 
+A person can be a friend of another person. 
+A person may have siblings (brothers / sisters), A person may be a parent (mother/father) of another person.
+ A person   stays either 
+
+create(p:Person{name:"Tushar",age:24}) return p;
+create(p:Person{name:"Ganesh",age:45}) return p;
+create(p:Person{name:"Amar",age:26}) return p;
+create(b:Brother{name:"Vinay"}) return b;
+create(s:Sister{name:"Sanskruti"}) return s;
+create(c:Children{name:"Amit"}) return c;
+create(l:Location{name:"Pune"}) return l;
+create(l:Location{name:"Mumbai"}) return l;
+create(l:Location{name:"Kolhapur"}) return l;
+match(p:Person),(p1:Person) where p.name="Tushar" and p1.name="Ganesh" create (p)-[:Friend_of]->(p1) return p,p1;
+match(p:Person),(b:Brother) where p.name="Ganesh" and b.name="Vinay" create (p)-[:Brother_of]->(b) return p,b;
+match(p:Person),(c:Children) where p.name="Ganesh" and c.name="Amit" create (p)-[:Parent_of]->(c) return p,c;
+match(p:Person),(l:Location) where p.name="Ganesh" and l.name="Pune" create (p)-[:Stays_in]->(l) return p,l;
+match(p:Person),(l:Location) where p.name="Tushar" and l.name="Mumbai" create (p)-[:Stays_in]->(l) return p,l;
+match(p:Person),(l:Location) where p.name="Amar" and l.name="Mumbai" create (p)-[:Stays_in]->(l) return p,l;
+
+Queries 1) Display the names of people living in Mumbai.
+match(p:Person),(l:Location) where l.name="Mumbai" and (p)-[:Stays_in]->(l) return p.name;
+
+2) Display the nodes having age above 40.
+match(p:Person) where p.age>40 return p.name;
+ 

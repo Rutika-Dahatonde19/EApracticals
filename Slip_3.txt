@@ -1,0 +1,77 @@
+Slip no 3
+3.Create an abstract class Order (id, description). Derive two classes Purchase Order and Sales Order with details of Supplier and Customer respectively. Create object of each Purchase Order And Sales Order. Display the details of the supplier and customer.
+
+abstract class Order()
+{
+var orderid:Int=0
+var odescription:String=" ";
+}
+class PurchaseOrder( var oid:Int,val descrip:String,var sid:Int,var
+sname:String,var pno:Long) extends Order()
+{
+orderid=oid;
+odescription=descrip;
+def display()
+{
+println("Order Id:"+orderid);
+println("Description:"+odescription);
+println("Supplier Id:"+sid);
+println("Supplier Name:"+sname);
+println("Phone Number:"+pno);
+}
+}
+class SalesOrder(var oid:Int,val descrip:String,var cid:Int,var
+cname:String,var pno:Long) extends Order()
+{
+orderid=oid;
+odescription=descrip;
+def display()
+{
+println("Order Id:"+orderid);
+println("Description:"+odescription);
+println("Customer Id:"+cid);
+println("Customer Name:"+cname);
+println("Phone Number:"+pno);
+}
+}
+object Slip3 {
+def main(args:Array[String])
+{
+var c1=new SalesOrder(1,"Two
+Laptops",200,"XYZ",233221);
+var s1=new PurchaseOrder(2,"Three
+Computers",101,"ABC",211231);
+println("Purchase Order");
+println("--------------------------------------------");
+c1.display();
+println("Sales Orders");
+println("--------------------------------------------");
+s1.display();
+}
+}
+slip 3
+2)
+> db.book.insert({BName:"shyamchiaai",cost:700,author:"sane guruji",published:2007})
+
+> db.book.insert({BName:"Two Saints",cost:1700,author:"raguramkrishna",published:2017})
+
+> db.book.insert({BName:"ramkrushna paramhans",cost:800,author:"raguramkrishna",published: 2017})
+
+>db.book.insert({BName:"DMS",cost:300,author:"raguramkrishna",published:2005})
+3)
+> db.publisher.insert({pname:"OReilly",language:"English",books:[{BName:"ramkrushna
+paramhans"},{BName:"Two Saints"}],city:"mumbai"})
+
+>db.publisher.insert({pname:"vision",language:"English",books:[{BName:"DMS"}],city:"pune"})
+
+> db.publisher.insert({pname:"OReilly",language:"marathi",books:[{BName:"shyamchi
+aai"}],city:"mumbai"})
+
+4)
+a)> db.publisher.find({city:"mumbai"})
+
+b)> db.book.find({cost:{$lt:1000}})
+
+c) > db.book.find({author:"raguramkrishna",published:2017})
+
+d)> > db.publisher.find({pname:"OReilly",$or:[{language:"English"},{language:"marathi"}]})

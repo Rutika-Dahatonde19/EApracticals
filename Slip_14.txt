@@ -1,0 +1,97 @@
+Slip no 14
+
+14.Design an abstract class Employee with computeSal() as an abstract function. Create two subclasses Worker and Manager. Salary of worker should be calculated on hourly basis of work and Salary of Manager should be calculated on monthly basis with additional incentives. Create five objects each of Worker and Manager class, and display their details
+
+abstract class Employee
+{
+def computeSalary():Int;
+}
+class manager(var mno:Int,var mname:String,var month:Int) extends Employee
+{
+def computeSalary():Int=
+{
+var salary=month*30000;
+return salary;
+}
+def display()
+{
+println("------------------------------------
+---------------------------------");
+println("Manager No:"+mno);
+println("Manager Name:"+mname);
+println("Salary:"+computeSalary());
+}
+}
+class worker(var wno:Int,var wname:String,var hr:Int) extends Employee
+{
+def computeSalary():Int=
+{
+var salary=hr*300;
+return salary;
+}
+def display()
+{
+println("------------------------------------
+-------------------------------------");
+println("Worker No:"+wno);
+println("Worker Name:"+wname);
+println("Salary:"+computeSalary());
+}
+}
+object Slip14
+{
+def main(args:Array[String])
+{
+var manager1=new manager(1,"Akshay Borse",4);
+var manager2=new manager(2,"Sumit Amritkar",3);
+var manager3=new manager(3," Vishnu Khatale",2);
+var manager4=new manager(4,"Roshan Adke",5);
+var manager5=new manager(5,"Tushar Amrutkar",9);
+var worker1=new worker(1,"Ganesh Darade",12);
+var worker2=new worker(2,"Viraj Gadekar",16);
+var worker3=new worker(3," Abhi Chavhan",10);
+var worker4=new worker(4,"Kalpesh Deshmukh",5);
+var worker5=new worker(5,"Abhijit Rakibe",4);
+println("-----------------------MANAGER------------------
+--------------------------");
+manager1.display();
+manager2.display();
+manager3.display();
+manager4.display();
+manager5.display();
+println("-----------------------WORKER-------------------
+-------------------------");
+worker1.display();
+worker2.display();
+worker3.display();
+worker4.display();
+worker5.display();
+}
+}
+
+2 Model the following Furniture Showroom information as a graph model, and answer the queries using Cypher. Consider a Furniture showroom with different types of furnitures like sofas sets, tea tables, cupboards, beds, dining tables, etc. Showroom is divided into different sections, one section for each furniture type, Each section handled by a sales staff. A sales staff can handle one or more sections. Customer may enquire about furniture. An enquiry may result in a purchase by the customer.  
+create(f:Furniture{name:"Sofa Set", color:"white"}) return f;
+create(f:Furniture{name:"Tea Table", color:"Black"}) return f;
+create(f:Furniture{name:"Cupboards", color:"Brown"}) return f;
+create(f:Furniture{name:"beds", color:"white"}) return f;
+create(f:Furniture{name:"Dining Table", color:"Black"}) return f;
+create(s:Staff{name:"Satish"}) return s;
+create(s:Staff{name:"Suraj"}) return s;
+create(s:Staff{name:"Omkar"}) return s;
+create(s:Staff{name:"Pratik"}) return s;
+match(s:Staff),(f:Furniture) where s.name="Satish" and  f.name="Sofa Set" create (s)-[:Handled]->(f) return s,f;
+match(s:Staff),(f:Furniture) where s.name="Suraj" and  f.name="Tea Table" create (s)-[:Handled]->(f) return s,f;
+match(s:Staff),(f:Furniture) where s.name="Omkar" and  f.name="Cupboards" create (s)-[:Handled]->(f) return s,f;
+match(s:Staff),(f:Furniture) where s.name="Pratik" and  f.name="beds" create (s)-[:Handled]->(f) return s,f;
+create(c:Customer{name:"Priyanshu"}) return c;
+create(c:Customer{name:"Sahil"}) return c;
+match(c:Customer),(f:Furniture) where c.name="Sahil" and  f.name="Sofa Set" create (c)-[:Enquired_about]->(f) return c,f;
+match(c:Customer),(f:Furniture) where c.name="Priyanshu" and  f.name="Dining Table" create (c)-[:Enquired_about]->(f) return c,f;
+
+Quries
+
+1) List the types of furniture’s available in white colour.
+match(f:Furniture) where f.color="white" return f.name;
+
+2) List the sections handled by Mr. Satish. 
+match(f:Furniture),(s:Staff) where s.name="Satish" and (s)-[:Handled]->(f) return f.name;

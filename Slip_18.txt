@@ -1,0 +1,64 @@
+Slip no 18
+18.Write a program to calculate sum of all perfect numbers between 1 and 100. Display perfect numbers also.
+
+object Slip18
+{
+def main(args:Array[String])
+{
+var sum=0;
+var psum=0;
+var perfect=" ";
+for(i<-1 to 100)
+{
+for(j<-1 to i-1)
+{
+if(i%j==0)
+{
+sum=sum+j;
+}
+}
+if(sum==i)
+{
+psum=psum+i;//sum of perfect number;
+perfect=perfect+" "+i;
+}
+sum=0;
+}
+println("perfectNumbers:"+perfect);
+println("Sum of Perfect Number:"+psum);
+}
+}
+
+2 Model the following Doctor’s information system as a graph model, and answer the following queries using Cypher. 
+Consider the doctors in and around Pune.
+ Each Doctor is specialized in some stream like Pediatric, Gynaec, Heart Specialist, Cancer Specialist, ENT, etc. 
+A doctor may be a visiting doctor across many hospitals or he may own a clinic. 
+A person can provide a review/can recommend a doctor.   
+
+create (s:Streams {name:"Pediatric"}) return s;
+create (s:Streams {name:"Heart Specialist"}) return s;
+create (s:Streams {name:"Cancer"}) return s;
+create (s:Streams {name:"Neurosurgery"}) return s;
+create (d:Doctor {name:"Aarohi",type:"Own Clinic"}) return d;
+create (d:Doctor {name:"Rohit",type:"Visiting Hospital"}) return d;
+create (d:Doctor {name:"Sanket",type:"Own Clinic"}) return d;
+create (d:Doctor {name:"Krishna",type:"Visiting Hospital"}) return d;
+create (p:Person {name:"Vishal"}) return p;
+create (p:Person {name:"Swaraj"}) return p;
+create (r:Recommend {name:"Service"}) return r;
+create (r:Recommend {name:"Recovery"}) return r;
+match(d:Doctor),(r:Recommend) where d.name="Sanket" and r.name="Recovery" create (d)-[:Recommend_as]->(r) return d,r;
+match(d:Doctor),(r:Recommend) where d.name="Rohit" and r.name="Service" create (d)-[:Recommend_as]->(r) return d,r;
+match(d:Doctor),(s:Streams) where d.name="Aarohi" and s.name="Neurosurgery" create (d)-[:Is_Of]->(s) return d,s;
+match(d:Doctor),(s:Streams) where d.name="Sanket" and s.name="Cancer" create (d)-[:Is_Of]->(s) return d,s;
+match(d:Doctor),(s:Streams) where d.name="Rohit" and s.name="Heart Specialist" create (d)-[:Is_Of]->(s) return d,s;
+match(d:Doctor),(s:Streams) where d.name="Krishna" and s.name="Neurosurgery" create (d)-[:Is_Of]->(s) return d,s;
+
+Queries
+
+1) List the Neurosurgery doctors.
+match(d:Doctor),(s:Streams) where s.name="Neurosurgery" and (d)-[:Is_Of]->(s) return d.name;
+
+2)List the doctors who own a clinic. 
+match(d:Doctor),(s:Streams) where d.type="Own Clinic" return d.name;
+ 

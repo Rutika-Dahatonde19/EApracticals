@@ -1,0 +1,78 @@
+Slip no 4
+4.Write a program to calculate transpose of a matrix and check if there sultant matrix is lower triangular or not.(accept : 5 M transpose : 10M check lower triangular:10M display:5M)
+object Slip4
+{
+def main(args:Array[String])
+{
+var mat=Array.ofDim[Int](3,3);
+var rmat=Array.ofDim[Int](3,3);
+var isLower:Boolean=true;
+println("Enter Matrix");
+for(i<-0 to 2)
+{
+for(j<-0 to 2)
+{
+mat(i)(j)=scala.io.StdIn.readInt();
+}
+}
+println("Matrix is:");
+for(i<-0 to 2)
+{
+for(j<-0 to 2)
+{
+print(mat(i)(j)+" ");
+}
+println();
+}
+for(i<-0 to 2)
+{
+for(j<-0 to 2)
+{
+rmat(i)(j)=mat(j)(i);
+}
+}
+println("Transepose of Matrix is:");
+for(i<-0 to 2)
+{
+for(j<-0 to 2)
+{
+print(rmat(i)(j)+" ");
+}
+println();
+}
+for(i<-0 to 2)
+{
+for(j<-0 to 2)
+{
+if(i<j)
+{
+if(rmat(i)(j)!=0)
+isLower=false;
+}
+}
+}
+if(isLower==true)
+println("Is Lower Triangular");
+else
+println("Is not Lower Triangular");
+}
+}
+
+slip 4
+2)
+>db.Hospital.insert({Hno:1,Hname:"AAA",Specialization:["Pediatric","Gynaec","Orthopaedic"],People:[{Pname:"PQR",Rating:4},{Pname:"SDE",Rating:5}],Doctor:[{"Dname" : "WWW",
+"Visit" : "Sunday"}]})
+
+>db.Hospital.insert({Hno:2,Hname:"BBB",Specialization:["Gynaec","Orthopaedic"],People:[{Pname:"POP",Rating:2},{Pname:"SDE",Rating:3}],Doctor:[{"Dname":"XXX",Visit:"Monday"}]})
+
+>db.Hospital.insert({Hno:3,Hname:"CCC",Specialization:["Gynaec","Orthopaedic","Pediatric"],People:[{Pname:"KLO",Rating:3},{Pname:"LPO",Rating:3}],Doctor:[{"Dname" : "XXX","Visit":"Tuesday"}]})
+
+4)
+a) > db.Hospital.find({Specialization:"Pediatric"})
+
+b)>db.Hospital.find({Hname:"CCC","Doctor.Visit":"Tuesday"})
+
+c)>db.Hospital.find({Specialization:{$not:{$size:1}},"Doctor.Dname":"XXX"})
+
+d) > db.Hospital.find({"People.Rating":{ $gt: 3 },Hname:"AAA"})
+ 

@@ -1,0 +1,63 @@
+Slip no 15
+15.Write a program to create a list of 1 to 100 numbers. Create second list from first list selecting numbers which are perfect square. Display it.
+
+import scala.collection.mutable.ListBuffer
+object Slip15
+{
+def main(args:Array[String])
+{
+val l1=List.range(1,101);
+var l2:ListBuffer[Int]=ListBuffer();
+for(i<-l1)
+{
+for(j<-1 to i)
+{
+if(i==j*j)
+l2+=i;
+}
+}
+println("Perfect Numbers:"+l2);
+}
+}
+
+2) Model the following Clothing Brand information as a graph model, and answer the following queries using Cypher. 
+Consider a Mall for clothing. This mall will include different sections for males, females and kids.
+ Each section contains different types of apparels from different brands.  
+There are many apparels with different designs, of each type.
+ An apparel may be available in one or more standard sizes (S/M/L/XL/XXL) 
+
+create (s:Section {name:"Male"}) return s;
+create (s:Section {name:"Female"}) return s;
+create (s:Section {name:"Kids"}) return s;
+create (a:Apparel {name:"Kurta"}) return a;
+create (a:Apparel {name:"Saree"}) return a;
+create (a:Apparel {name:"T-Shirts"}) return a;
+create (a:Apparel {name:"Jackets"}) return a;
+create (a:Apparel {name:"Frock"}) return a;
+create (a:Apparel {name:"Shirt"}) return a;
+create (s:Size {name:"S"}) return s;
+create (s:Size {name:"M"}) return s;
+create (s:Size {name:"L"}) return s;
+match(s:Section),(a:Apparel) where s.name="Female" and a.name="Kurta" create (s)-[:Has]->(a) return s,a;
+match(s:Section),(a:Apparel) where s.name="Female" and a.name="Saree" create (s)-[:Has]->(a) return s,a;
+match(s:Section),(a:Apparel) where s.name="Male" and a.name="Jackets" create (s)-[:Has]->(a) return s,a;
+match(s:Section),(a:Apparel) where s.name="Male" and a.name="Jackets" create (s)-[:Has]->(a) return s,a;
+match(s:Section),(a:Apparel) where s.name="Kids" and a.name="Frock" create (s)-[:Has]->(a) return s,a;
+create (ss:SalesStaff {name:"Smita"}) return ss;
+create (ss:SalesStaff {name:"Geeta"}) return ss;
+create (ss:SalesStaff {name:"Seeta"}) return ss;
+create (ss:SalesStaff {name:"Raman"}) return ss;
+
+match(ss:SalesStaff),(s:Section) where s.name="Kids" and ss.name="Smita" create (ss)-[:Work_in]->(s) return ss,s;
+match(ss:SalesStaff),(s:Section) where s.name="Female" and ss.name="Geeta" create (ss)-[:Work_in]->(s) return ss,s;
+match(ss:SalesStaff),(s:Section) where s.name="Male" and ss.name="Seeta" create (ss)-[:Work_in]->(s) return ss,s;
+match(ss:SalesStaff),(s:Section) where s.name="Kids" and ss.name="Raman" create (ss)-[:Work_in]->(s) return ss,s;
+
+Queries
+
+1)List the different apparels type in female section
+match(s:Section),(a:Apparel) where s.name="Female" and (s)-[:Has]->(a) return a.name;
+
+2) List the names of sales staff in Kids section.
+match(ss:SalesStaff),(s:Section) where s.name="Kids" and (ss)-[:Work_in]->(s) return ss.name;
+ 

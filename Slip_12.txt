@@ -1,0 +1,101 @@
+Slip no 12
+12.Write a program for multiplication of two matrices. Find determinant ofresultant matrix.
+
+object Slip12
+{
+def main(args:Array[String])
+{
+val arr1=Array.ofDim[Int](2,2);//1st array
+val arr2=Array.ofDim[Int](2,2);//2nd array
+var rarry=Array.ofDim[Int](2,2)//resultant Array
+println("Enter Matrix1");
+for(i<-0 to 1)
+{
+for(j<-0 to 1)
+{
+arr1(i)(j)=scala.io.StdIn.readInt();//read Array1 element
+}
+}
+println("Enter Matrix2");
+for(i<-0 to 1)
+{
+for(j<-0 to 1)
+{
+arr2(i)(j)=scala.io.StdIn.readInt();//read Array2 element
+}
+}
+println("MATRIX -1");
+for(i<-0 to 1)
+{
+for(j<-0 to 1)
+{
+print(arr1(i)(j)+" ");//print Array
+Element
+}
+println();
+}
+println("MATRIX -2");
+for(i<-0 to 1)
+{
+for(j<-0 to 1)
+{
+print(arr2(i)(j)+" ");//print Array
+Element
+}
+println();
+}
+for(i<-0 to 1)
+{
+for(j<-0 to 1)
+{
+rarry(i)(j)=0;
+for(k<-0 to 1)
+rarry(i)(j)=rarry(i)(j)+arr1(i)(k)*arr2(k)(j);//multiplication
+}
+}
+println("RESULTANT MATRIX");
+for(i<-0 to 1)
+{
+for(j<-0 to 1)
+{
+print(rarry(i)(j)+" ");//print Array
+Element
+}
+println();
+}
+var det=(rarry(0)(0)*rarry(1)(1))-
+(rarry(0)(1)*rarry(1)(0));
+println("Determinant:"+det);
+}
+}
+
+2)Model the following Dairy Brand information as a graph model , and answer the following queries using Cypher. 
+There are various dairy brands like Amul, Go, Britannia, Gokul etc. Their popularity varies across different states in India.
+ The popularity is measured as %, with a high popularity defined as >=90%, Medium Popularity between 50 to 90%, and Low
+ popularity <50%. Each brand manufactures various types of Dairy products like milk, butter, cheese, Curd etc. 
+The milk product can be categorized into Low fat/medium fat or high fat content type.  
+
+create(b:Brands{name:"Gokul",popularity:"95%"}) return b;  
+create(b:Brands{name:"Britannia",popularity:"45%"}) return b;
+create(b:Brands{name:"Amul",popularity:"75%"}) return b;
+create(p:Products{name:"Cheese"}) return p;
+create(p:Products{name:"Curd"}) return p;
+create(p:Products{name:"Milk"}) return p;
+create(p:Products{name:"Butter"}) return p;
+create(c:Category{name:"Low Fat"}) return c;
+create(c:Category{name:"Medium Fat"}) return c;
+create(c:Category{name:"Medium Fat"}) return c;
+match(b:Brands),(p:Products) where b.name="Amul" and p.name="Cheese" create (b)-[:Has_Products]->(p) return b,p;
+match(b:Brands),(p:Products) where b.name="Gokul" and p.name="Milk" create (b)-[:Has_Products]->(p) return b,p;
+match(p:Products),(c:Category) where p.name="Curd" and c.name="Medium Fat" create (p)-[:Has_Category]->(c) return p,c;
+match(p:Products),(c:Category) where p.name="Milk" and c.name="Low Fat" create (p)-[:Has_Category]->(c) return p,c;
+match(p:Products),(c:Category) where p.name="Cheese" and c.name="High Fat" create (p)-[:Has_Category]->(c) return p,c;
+
+Queries
+
+1}List the names of different brands considered in your graph.
+match(b:Brands) return *;
+
+2) List the brands that are highly popular in Maharashtra.
+match(b:Brands) where b.popularity>="90%" return b;
+ 

@@ -1,0 +1,53 @@
+Slip no 19
+import scala.util._object Prg19
+{
+def main(args:Array[String])
+{
+var l1:List[Int]=List();
+var l2:List[Int]=List();
+var n1=0;
+for(i<- 1 to 10)
+{
+l1::=Random.nextInt(10);
+}
+println("List1:"+l1.sorted);
+for(j<-l1)
+{
+n1=3*j*j+4*j+6;
+l2::=n1;
+}
+println("list2:"+l2.sorted)
+}
+}
+		
+		
+		
+
+2 Model the following Automobile information system as a graph model, and answer the following queries using Cypher.
+ Consider an Automobile industry manufacturing different types of vehicles like Heavy Vehicles, Light Vehicles, etc.
+ A customer can buy one or more types of vehicle. A person can recommend or rate a vehicle type.
+
+create(i:Industry{name:"KTM"})return i;
+create(v:VehicleType{name:"Heavy"})return v;
+create(v:VehicleType{name:"Light"})return v;
+match(i:Industry),(v:VehicleType) where i.name="KTM" and v.name="Heavy" create(i)-[:Has]->(v) return i,v;
+match(i:Industry),(v:VehicleType) where i.name="KTM" and v.name="Light" create(i)-[:Has]->(v) return i,v;
+create(vv:VehicleChar{name:"Duke",color:"Orange",wheels:"two wheeler"})return vv;
+create(vv:VehicleChar{name:"RC",color:"White",wheels:"two wheeler"})return vv;
+match(v:VehicleType),(vv:VehicleChar) where v.name="Heavy" and vv.name="Duke" create (v)-[:has_char]->(vv) return vv,v;
+match(v:VehicleType),(vv:VehicleChar) where v.name="Light" and vv.name="Activa" create (v)-[:has_char]->(vv) return vv,v;
+create(c:Customer {name:"Shivani"}) return c;
+create(c:Customer {name:"Pooja"}) return c;
+match(c:Customer),(v:VehicleType) where c.name="Shivani" and v.name="Light" create (c)-[:Bought]->(v) return c,v;
+match(c:Customer),(v:VehicleType) where c.name="Shivani" and v.name="Heavy" create (c)-[:Bought]->(v) return c,v;
+match(c:Customer),(v:VehicleType) where c.name="Pooja" and v.name="Light" create (c)-[:Bought]->(v) return c,v;
+ 
+
+Queries
+
+1)List the characteristics of heavy vehicle types. 
+match(v:VehicleType),(vv:VehicleChar) where v.name="Heavy" and (v)-[:has_char]->(vv) return vv.name,vv.color,vv.wheels;
+
+2) List the name of customers who bought a heavy vehicle. 
+match(c:Customer),(v:VehicleType) where v.name="Heavy" and (c)-[:Bought]->(v) return c.name;
+ 

@@ -1,0 +1,57 @@
+Slip no 6
+6.Write a program to read a character and a string from user and remove first and last occurrence of the character from the string. Display resultant string after reversing its case.
+
+object Slip6
+{
+def reverseString(ch:Char):Char=
+{
+if(ch.isLower)
+ch.toUpper;
+else
+ch.toLower;
+}
+def main(args:Array[String])
+{
+var ch=' ';
+var str=" ";
+println("Enter String:");
+str=scala.io.StdIn.readLine();
+var str1=new StringBuilder(str);
+println("Enter character:");
+ch=scala.io.StdIn.readChar();
+str1.deleteCharAt(str1.indexOf(ch.toString()));
+var
+str3=str1.deleteCharAt(str1.lastIndexOf(ch.toString())).toString;
+var str4=str3.map(reverseString)
+println(str4);
+}
+}
+
+slip6
+2) 
+> db.turisum.insert({name:"veenaword",rate:9,package:[{pname:"shillong",cost:10000},{pnam
+e:"gujart",cost:7000},{pname:"karnataka",cost:6000}]})
+
+>db.turisum.insert({name:"rohit",rate:7,package:[{pname:"shillong",cost:10000},{pname:"rujan",cost:7000}]})
+
+3)
+>db.tour.insert({sourc:"john",destination:"shillong",toerisumName:"veenaword",tourisumrate:8000,expense:20000,year:2018,customer:[{cname:"mukesh",city:"pune"},{cname:"abhijeet
+sangita",city:"baramati"},{cname:"manisha",city:"15no"},{cname:"manasi",city:"latur"}]})
+
+>db.tour.insert({sourc:"john",destination:"karnataka",toerisumName:"veena
+word",tourisumrate:80090,expense:20900,year:2017,customer:[{cname:"mukesh",city:"pune"},{cname:"abhijeetsangita",city:"baramati"},{cname:"manisha",city:"15no"},{cname:"manasi",city:"latur"}]})
+
+>db.tour.insert({sourc:"john",destination:"rajasthan",toerisumName:"rohit",tourisumrate:6000,expense:30400,year:2019,customer:[{cname:"mukesh",city:"pune"},{cname:"abhijeet
+sangita",city:"baramati"},{cname:"manisha",city:"15no"},{cname:"manasi",city:"latur"}]})
+
+>db.tour.insert({sourc:"john",destination:"taj",toerisumName:"rohit",tourisumrate:60090,expense:10400,year:2016,customer:[{cname:"mukesh",city:"pune"},{cname:"abhijeetsangita",city:"baramati"},{cname:"manisha",city:"15no"},{cname:"manasi",city:"latur"}]})
+
+4)
+a) >db.turisum.find({name:"veena word"}).pretty()
+
+b) >db.turisum.find({}).sort({"rate":-1}).limit(1)
+
+c)>db.tour.aggregate([{"$sort":{"year":1}},{"$limit":3},{$group:{_id:null,"count":{"$sum":"$expense"}}}])
+
+d) > db.tour.find({destination:"shillong"})
+ 
